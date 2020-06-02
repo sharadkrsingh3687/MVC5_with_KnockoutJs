@@ -1,0 +1,222 @@
+﻿
+@model InHouseApp.WebPortal.Models.ProductModel
+
+@if (Model.IsEditMode)
+{
+    <h2>Update Product</h2>
+}
+else
+{
+    <h2>Add New Product</h2>
+}
+<hr />
+<form class="form-horizontal" id="productContainer">
+    <div class="alert alert-success" role="alert" style="display:none; margin-top: 10px;"> 
+        <span class="glyphicon  glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Form has submitted with successful 
+    </div>
+    <div class="alert alert-danger" role="alert" style="display:none; margin-top: 10px;"> 
+        <span class="glyphicon  glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Please check your submission 
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <label for="ProductName" class="col-sm-2 control-label">Product Name</label>
+            <div class="col-sm-10">
+                <input id="ProductName" type="text"
+                       name="ProductName"
+                       class="form-control"
+                       placeholder="Product Name"
+                       data-bind="value: ProductName">
+                <input id="ProductID" type="hidden"
+                       name="ProductID"
+                       data-bind="value: ProductID; visible: false" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <label for="ProductType" class="col-sm-2 control-label">Product Type</label>
+            <div class="col-sm-10">
+                <input id="ProductType" name="ProductType"
+                       class="form-control"
+                       placeholder="Product Type"
+                       data-bind="value: ProductType">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <label for="ImageURL" class="col-sm-2 control-label">Image URL</label>
+            <div class="col-sm-10">
+                <input id="ImageUrl"name="ImageUrl"
+                       class="form-control"
+                       placeholder="Image URL"
+                       data-bind="value: ImageUrl">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <label for="ProductDesc" class="col-sm-2 control-label">Product Description</label>
+            <div class="col-sm-10">
+                <textarea id="ProductDesc" name="ProductDesc"
+                          class="form-control"
+                          rows="4"
+                          data-bind="value: ProductDesc"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <label for="SKUNumber" class="col-sm-2 control-label">SKU Number</label>
+            <div class="col-sm-10">
+                <input id="SKUNumber" name="SKUNumber"
+                       class="form-control"
+                       placeholder="SKU Number"
+                       data-bind="value: SKUNumber" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <label for="UnitPrice" class="col-sm-2 control-label">Unit Price</label>
+            <div class="col-sm-10">
+                <input id="UnitPrice" name="UnitPrice"
+                       class="form-control"
+                       placeholder="Unit Price"
+                       data-bind="value: UnitPrice" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <label for="Stock" class="col-sm-2 control-label">Stock</label>
+            <div class="col-sm-10">
+                <input id="Stock" name="Stock"
+                       class="form-control"
+                       placeholder="Stock"
+                       data-bind="value: Stock" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <label for="starRating" class="col-sm-2 control-label">Star Rating</label>
+            <div class="col-sm-10">
+                <select id="StarRating" class="form-control" name="StarRating" data-bind="value: StarRating">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="rows col-sm-offset-3">
+        <div class="form-group">
+            <button type="button" class="btn btn-success" data-bind="click: submitForm">Save</button>
+            @Html.ActionLink("Cancel", "Products","Product", new { }, new {  @class = "btn btn-primary"})
+            <button type="button" class="btn btn-danger" data-bind="visible: IsEditMode, click: deleteProduct">Delete</button>
+        </div>
+    </div>
+</form>
+<script type="text/javascript" src="~/Scripts/knockout-3.5.1.js"></script>
+<script type="text/javascript" src="~/Scripts/knockout.validation.js"></script>
+<script type="text/javascript">
+
+
+    $(document).ready(function () {
+
+        ko.validation.init({
+
+            registerExtenders: true,
+            messagesOnModified: true,
+            insertMessages: true,
+            parseInputAttributes: true,
+            messageTemplate: null,
+            errorMessageClass: 'errorStyle',
+            errorElementClass: 'errorControl',
+            errorClass: 'error',
+            errorsAsTitle: true,
+            decorateElementOnModified: true,
+            decorateInputElement: true
+
+        }, true);
+
+        var viewModelData = (@Html.Raw(Json.Encode(Model.Product)));
+        viewModelData.IsEditMode = (@Html.Raw(Json.Encode(Model.IsEditMode)));
+
+        console.log(viewModelData);
+
+        var productViewModel = {
+
+            ProductID: ko.observable(viewModelData.ProductID),
+            ProductName: ko.observable(viewModelData.ProductName).extend({
+                required: true, minLength: 6, maxLength: 100
+            }),
+            ProductType: ko.observable(viewModelData.ProductType).extend({
+                required: true, minLength: 6, maxLength: 100
+            }),
+            ImageUrl: ko.observable(viewModelData.ImageUrl),
+            ProductDesc: ko.observable(viewModelData.ProductDesc),
+            SKUNumber: ko.observable(viewModelData.SKUNumber).extend({ required: true, minLength: 6, maxLength: 20 }),
+            UnitPrice: ko.observable(viewModelData.UnitPrice).extend({ mixLength: 10 }),
+            Stock: ko.observable(viewModelData.Stock),
+            StarRating: ko.observable(viewModelData.StarRating),
+            IsEditMode: ko.observable(viewModelData.IsEditMode),
+
+            submitForm: function () {
+                $('div.alert-success').hide();
+                $('div.alert-danger').hide();
+                if (productViewModel.errors().length === 0) {
+                     $.ajax({
+                            url: '@Url.Action("EditProduct", "Product")',
+                            type: 'POST',
+                            contentType: 'application/json; charset=utf-8',
+                            data: ko.toJSON(productViewModel),
+                            success: function (data) {
+                                $('div.alert-success').show();
+                            }
+                    }).fail(
+                    function (xhr, textStatus, err) {
+                        alert(err);
+                    });                    
+                } else {
+                    $('div.alert-danger').show();
+                    productViewModel.errors.showAllMessages();
+                    return false;
+                }
+            },
+
+            deleteProduct: function () {
+                ajax({
+                    url: '@Url.Action("DeleteProduct","Product")',
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    data: ko.toJSON(productViewModel.ProductId),
+                    success: function (data) {
+                        if (data.status === "success") {
+                            window.history.go(-1);
+                            return false;
+                        }
+                        else {
+                            alert('Due to internal error operation not work!');
+                        }
+                    }.fail(
+                        function (xhr, textStatus, err) {
+                            alert(err);
+                        })
+                });
+            }
+        };
+
+        //catch error
+        productViewModel.errors = ko.validation.group(productViewModel);
+        ko.applyBindings(productViewModel, document.getElementById("productContainer"));
+
+    });
+
+</script>
+
+
+

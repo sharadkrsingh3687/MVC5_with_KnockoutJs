@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InHouseApp.EntityModel", "InHouseApp.EntityModel\InHouseApp.EntityModel.csproj", "{F8EB8D86-0889-40BD-BFBB-F14B08D48A01}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InHouseApp.DataAccess", "InHouseApp.DataAccess\InHouseApp.DataAccess.csproj", "{1F04911E-AAD5-4AB2-8D4C-1AAA7AC0FD1A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InHouseApp.WebPortal", "InHouseApp.WebPortal\InHouseApp.WebPortal.csproj", "{634913CE-A9AC-4EAD-8D0D-F03DB1C56A5E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F8EB8D86-0889-40BD-BFBB-F14B08D48A01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8EB8D86-0889-40BD-BFBB-F14B08D48A01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8EB8D86-0889-40BD-BFBB-F14B08D48A01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8EB8D86-0889-40BD-BFBB-F14B08D48A01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F04911E-AAD5-4AB2-8D4C-1AAA7AC0FD1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F04911E-AAD5-4AB2-8D4C-1AAA7AC0FD1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F04911E-AAD5-4AB2-8D4C-1AAA7AC0FD1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F04911E-AAD5-4AB2-8D4C-1AAA7AC0FD1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{634913CE-A9AC-4EAD-8D0D-F03DB1C56A5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{634913CE-A9AC-4EAD-8D0D-F03DB1C56A5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{634913CE-A9AC-4EAD-8D0D-F03DB1C56A5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{634913CE-A9AC-4EAD-8D0D-F03DB1C56A5E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
+		SolutionGuid = {BFE2F9F4-1FA8-4E11-A88E-F18476D41D9D}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,67 @@
+﻿@using InHouseApp.WebPortal.Models
+@using InHouseApp.EntityModel.BusinessEntity
+
+@model InHouseApp.WebPortal.Models.ProductModel
+
+
+<h2>Product Search Page</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("Products", "Product", FormMethod.Post, new { @class = "navbar-form navbar-left form-inline" }))
+        {
+            @Html.TextBox("SearchProduct", Model.SearchProduct, new { @class = "form-control", @placeholder = "Search Product" })
+            <button type="submit" class="btn btn-success btn-md my-0">Search </button>
+        }
+        <div class="navbar-form navbar-right form-inline">
+            @Html.ActionLink("Add New Product","AddProduct","Product", new { Id = "" }, new { @class = "btn btn-success"})
+        </div>        
+    </div>            
+</div>
+<div class="row">&nbsp;</div>
+<div class="container">
+        @if (Model.ProductList != null && Model.ProductList.Count() > 0)
+        {
+            
+            foreach (Product product in Model.ProductList)
+            {
+                <div class="row" style="margin-bottom:10px!important;">
+                    <div class="col-xs-12">
+                        <div class="list-group-item clearfix">
+                            <div class="pull-left col-xs-2">
+                                <img src=@product.ImageUrl
+                                     alt=""
+                                     class="img-responsive"
+                                     style="max-height: 70px;">
+                            </div>
+                            <div class="pull-left">
+                                <div class="pull-left col-xs-12">
+                                    <h4 class="list-group-item-heading" style="color:!important;"><b>@product.ProductName</b></h4>
+                                    <p class="list-group-item-text text-wrap" >@product.ProductDesc</p>
+                                </div>
+                            </div>
+                            <div class="pull-right col-xs-2">
+                                <div><i class="fa fa-rupee"></i> @product.UnitPrice</div>
+                                <div>SKU: @product.SKUNumber</div>
+                                <div class="stars">
+                                    @for (int i = 0; i < product.StarRating; i++)
+                                    {<span class="glyphicon glyphicon-star"></span>}
+                                    @for (int i = product.StarRating; i < 5; i++)
+                                    {<span class="glyphicon glyphicon-star-empty"></span>}
+                                </div>
+                                @Html.ActionLink("Edit Product..","EditProduct", "Product", new { Id = product.ProductID }, new { @class = "btn btn-primary" })
+                            </div>
+                        </div>
+                    </div>
+                </div>      
+            }
+        }
+        else if (!string.IsNullOrEmpty(Model.SearchProduct))
+        {
+            <div class="rows">No record found!</div>
+        }
+</div>
+        
+
+    
